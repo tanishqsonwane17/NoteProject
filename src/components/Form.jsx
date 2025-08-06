@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { MyNote } from '../context/MyContext'
-
+import { nanoid } from 'nanoid'
 const Form = () => {
   const { formData, setFormData } = useContext(MyNote)
   const {
@@ -11,10 +11,14 @@ const Form = () => {
     reset
   } = useForm()
 
-  function submitHandler(data) {
-    setFormData([...formData, data])
-    reset()
+function submitHandler(data) {
+  const newNote = {
+    id: nanoid(),
+    ...data,
   }
+  setFormData([...formData, newNote])
+  reset()
+}
 
   return (
     <>
